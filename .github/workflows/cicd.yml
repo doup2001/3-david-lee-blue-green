@@ -22,8 +22,8 @@ jobs:
 
       - name: 이미지 빌드 및 전송하기
         run: |
-          docker build -t ${{secrets.DOCKER_USERNAME}}/express-healthcheck:latest .
-          docker push ${{secrets.DOCKER_USERNAME}}//express-healthcheck:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/express-healthcheck:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/express-healthcheck:latest
 
   # 배포하기
   deploy:
