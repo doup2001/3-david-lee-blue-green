@@ -1,0 +1,24 @@
+{
+  "name": "bluegreen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doup2001/3-david-lee-blue-green.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/doup2001/3-david-lee-blue-green/issues"
+  },
+  "homepage": "https://github.com/doup2001/3-david-lee-blue-green#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
