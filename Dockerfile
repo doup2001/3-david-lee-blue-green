@@ -5,7 +5,7 @@ FROM node:22
 WORKDIR /app
 
 # 복사
-COPY package.json ./
+COPY package*.json ./
 
 # 패키지 의존성 설치
 RUN npm install
