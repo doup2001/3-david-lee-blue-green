@@ -33,13 +33,13 @@ jobs:
       - name: SSH 설정하기
         run: |
           mkdir -p ~/.ssh
-          echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keygen -H ${{secrets.SERVER_HOST}} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
       - name: EC2 배포하기
         run: |
-          ssh -i ~/.ssh/id_rsa ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'bash -s' << EOF
+          ssh -i ~/.ssh/id_rsa ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'bash -s' <<EOF
           set -e
           cd /home/${{ secrets.SERVER_USER }}/bluegreen
           
@@ -52,7 +52,7 @@ jobs:
           else
             TARGET=blue
             STOP=none
-          fi 
+          fi
           
           echo "배포하는 컨테이너: \$TARGET"
           docker compose pull express-healthcheck-\$TARGET
@@ -77,12 +77,12 @@ jobs:
           fi
           
           echo "스위칭 Nginx to \$TARGET"
-          sed -i "s/express-healthcheck-[a-z]\\+/express-healthcheck=\$TARGET/g" nginx.conf
+          sed -i "s/express-healthcheck-[a-z]\\+/express-healthcheck-\$TARGET/g" nginx.conf
           docker stop nginx-proxy || true
           docker rm -f nginx-proxy || true
           docker compose up -d nginx-proxy
-          
-          if ["\$STOP" != "none" ]; then
+
+          if [ "\$STOP" != "none" ]; then
             docker stop \$STOP || true
           fi
           EOF
