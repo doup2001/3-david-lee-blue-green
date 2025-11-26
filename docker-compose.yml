@@ -33,5 +33,4 @@ services:
 
 networks:
   backend-proxy:
-    external: true
     driver: bridge

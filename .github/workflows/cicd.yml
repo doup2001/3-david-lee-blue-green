@@ -130,7 +130,7 @@ jobs:
           fi
           
           echo "스위칭 Nginx to \$TARGET"
-          sed -i "s/express-healthcheck-[a-z]\\+/express-healthcheck-\$TARGET/g" nginx.conf
+          sed -i "s/express-healthcheck-[a-z]\\+/express-healthcheck-\$TARGET/g" ./nginx/nginx.conf
           docker stop nginx-proxy || true
           docker rm -f nginx-proxy || true
           docker compose up -d nginx-proxy
